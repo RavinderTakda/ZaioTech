@@ -8126,16 +8126,6 @@ const course = [
 export const SchedulePage = () => {
 
 
-const datafetch = async() =>{
-  console.log('sdfsdf')
-
- await axios.get("http://localhost:8000/Zaiodata").then((res)=>console.log(res)).catch((err)=>console.log(err))
-
-}
-
-datafetch()
-
-
   
   const search =useLocation().search
   const hours =new URLSearchParams(search).get("Hour")
