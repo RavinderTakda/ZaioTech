@@ -23,3 +23,5 @@ module.exports={
     connection,
     ZaioModel
 }
+
+

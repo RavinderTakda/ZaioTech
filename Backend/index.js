@@ -32,7 +32,7 @@ app.get("/Zaiodata",async(req,res)=>{
 })
 
 
-app.listen(8000,async()=>{
+app.listen(process.env.PORT,async()=>{
     try{
         await connection,
         console.log("Connection to Mongodb Successfull");
@@ -40,5 +40,5 @@ app.listen(8000,async()=>{
     catch(err){
         console.log("Error connection to db")
     }
-    console.log("Listening to server 8000")
+    console.log("Listening to server")
 })
