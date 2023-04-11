@@ -2,6 +2,7 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { useLocation } from "react-router-dom";
+import axios from "axios"
 
 const course = [
   {
@@ -8123,6 +8124,8 @@ const course = [
 
 
 export const SchedulePage = () => {
+
+
   
   const search =useLocation().search
   const hours =new URLSearchParams(search).get("Hour")
@@ -8173,7 +8176,7 @@ for (let i = 0; i < course.length; i++) {
 
 
   
- console.log(CommitMinute)
+
 
   if (time >=CommitMinute) {
     t = t + 1;
