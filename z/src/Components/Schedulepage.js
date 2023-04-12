@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
+import { SpinnerCircular } from 'spinners-react';
 
 export const SchedulePage = () => {
+
+  const [course,setcourse] =useState([])
   const datafetch = async () => {
     await axios
-      .get("http://localhost:8000/Zaiodata")
+      .get("https://zaiocodingschool-o6hl.onrender.com/Zaiodata")
       .then((res) => {
-        localStorage.setItem("studydata", JSON.stringify(res.data));
+    setcourse(res.data)
       })
       .catch((err) => console.log(err));
   };
 
-  var course = JSON.parse(localStorage.getItem("studydata"));
 
+
+  useEffect(()=>{
+   
   datafetch();
+  },[])
+ 
+
+
+
 
   const search = useLocation().search;
   const hours = new URLSearchParams(search).get("Hour");
@@ -59,7 +69,10 @@ export const SchedulePage = () => {
 
   return (
     <div>
-      <FullCalendar
+
+{course.length==0?
+<h1>Loading......<SpinnerCircular thickness={300}  speed={500} /></h1>:
+<FullCalendar
         headerToolbar={{
           start: "today prev,next",
           center: "title",
@@ -72,7 +85,9 @@ export const SchedulePage = () => {
         initialView="dayGridMonth"
         dayMaxEvents={4}
         events={database}
-      />
+      />}
+
+      
     </div>
   );
 };
