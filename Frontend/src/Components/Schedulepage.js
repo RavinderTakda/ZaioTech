@@ -3,30 +3,22 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
-import { SpinnerCircular } from 'spinners-react';
+import { SpinnerCircular } from "spinners-react";
 
 export const SchedulePage = () => {
-
-  const [course,setcourse] =useState([])
+  const [course, setcourse] = useState([]);
   const datafetch = async () => {
     await axios
       .get("https://zaiocodingschool-o6hl.onrender.com/Zaiodata")
       .then((res) => {
-    setcourse(res.data)
+        setcourse(res.data);
       })
       .catch((err) => console.log(err));
   };
 
-
-
-  useEffect(()=>{
-   
-  datafetch();
-  },[])
- 
-
-
-
+  useEffect(() => {
+    datafetch();
+  }, []);
 
   const search = useLocation().search;
   const hours = new URLSearchParams(search).get("Hour");
@@ -69,25 +61,27 @@ export const SchedulePage = () => {
 
   return (
     <div>
-
-{course.length==0?
-<h1>Loading......<SpinnerCircular thickness={300}  speed={500} /></h1>:
-<FullCalendar
-        headerToolbar={{
-          start: "today prev,next",
-          center: "title",
-          end: "today prev,next",
-        }}
-        showNonCurrentDates={false}
-        fixedWeekCount={false}
-        eventOrder={false}
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        dayMaxEvents={4}
-        events={database}
-      />}
-
-      
+      {course.length == 0 ? (
+        <h1>
+          Loading......
+          <SpinnerCircular thickness={300} speed={500} />
+        </h1>
+      ) : (
+        <FullCalendar
+          headerToolbar={{
+            start: "today prev,next",
+            center: "title",
+            end: "today prev,next",
+          }}
+          showNonCurrentDates={false}
+          fixedWeekCount={false}
+          eventOrder={false}
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          dayMaxEvents={4}
+          events={database}
+        />
+      )}
     </div>
   );
 };
